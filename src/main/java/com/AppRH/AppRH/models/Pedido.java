@@ -24,6 +24,10 @@ public class Pedido implements Serializable {
 	private String nome;
 	
 	@NotEmpty
+	private String cliente;
+	
+	
+	@NotEmpty
 	private String descricao;
 	
 	@NotEmpty
@@ -33,6 +37,15 @@ public class Pedido implements Serializable {
 	private String salario;
 	
 	
+	
+		public String getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(String cliente) {
+		this.cliente = cliente;
+	}
+
 		public long getCodigo() {
 		return codigo;
 	}

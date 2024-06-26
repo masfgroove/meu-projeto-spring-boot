@@ -169,7 +169,6 @@
 </head>
 <body>
     <div class="header">
-       
         
         <div class="dropdown">
             <button class="dropbtn"><i class="fas fa-utensils"></i>Menu</button>
@@ -187,66 +186,65 @@
       
         
         </div>
-     <span>Bem-vindo, <strong th:text="${session.loggedUser}"></strong>! Cadastre os pratos de hoje.</span>
-    
+     <span>Bem-vindo, <strong th:text="${session.loggedUser}"></strong>! Escolha seu pedido.</span>
+        
         <div>
             <a href="#"><i class="fas fa-search"></i>Buscar</a>
             <a href="#"><i class="fas fa-utensils"></i>Status</a>
             <a href="#"><i class="fas fa-bell"></i>Depoimento</a>
-            <a href="#"><i class="fas fa-shopping-cart"></i>Carrinho</a>
+            <a href="/pedidos"><i class="fas fa-shopping-cart"></i>Carrinho</a>
         </div>
     </div>
-   <h3>Cadastro de Pratos</h3>
-<div class="container">
-
-
-    <th:block th:include="mensagemValidacao"></th:block>
-
-    <form method="post">
-
-        <div class="form-group">
-            <label for=""><b>Nome do prato:</b> </label> <input type="text"
-                class="form-control" value="" placeholder="Insira o nome do cargo"
-                name="nome" required> <small class="form-text text-muted"><i>*
-                    Utilize nomes e termos mais utilizados no mercado.</i></small>
-        </div>
-
-        <div class="row">
-            <div class="col">
-                <div class="form-group">
-                    <label for=""><b>Data de expiração:</b></label> <input type="date"
-                        value="" name="data" class="form-control" required /> <small
-                        class="form-text text-muted"><i>* Data em que a prato
-                            expira sua validade.</i></small>
-                </div>
-            </div>
-            <div class="col">
-                <div class="form-group">
-                    <label for=""><b>Valor:</b></label> R$ <input type="number"
-                        pattern="^\d+(\.|\,)\d{2}$" value="" name="salario"
-                        class="form-control" required /> <small
-                        class="form-text text-muted"><i>* Utilize valores
-                            considerando vírgula e ponto.</i></small>
-                </div>
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label for=""><b>Descrição da prato:</b></label>
-            <textarea class="form-control" name="descricao" maxlength="254"
-                rows="3" required></textarea>
-            <small class="form-text text-muted"><i>* Breve resumo do
-                    prato oferecida..</i></small>
-        </div>
-
-        <button type="submit" class="btn btn-success">Adicionar Prato</button>
-
-    </form>
-</div>
-
-       </div>
-    <br><br><br><br>
     
+    
+    <div class="container">
+        <div class="sidebar col-md-3">
+            <a href="#">TOAST E PRATOS</a>
+            <a href="#">ENTRADAS</a>
+            <a href="#">LANCHES</a>
+            <a href="#">MEU PEDIDO</a>
+            <a href="#">SOBREMESAS</a>
+            <a href="#">BEBIDAS</a>
+            <a href="#">AJUDA</a>
+            <a href="#">RECLAMAÇÃO</a>
+        </div>
+        <div class="content col-md-9">
+            <div class="menu-section">
+                <h2>TOAST E PRATOS</h2>
+                <div class="row" th:each="vaga, vagaIndex : ${vagas}" >
+                    <div class="col-sm-4" style="background-color:#2c3e50;">
+                        <img src="https://t3.ftcdn.net/jpg/05/37/60/42/240_F_537604246_aVF4ZcTn2aLmJd0jitT5N3AY5OfgXHRZ.jpg" alt="Scramble Bacon">
+                    </div>
+                    
+                    <div class="col-sm-4" style="background-color:#2c3e50;">
+                        <h3>
+                            <a th:href="${(#mvc.url('VC#detalhesVaga').arg(0, vaga.codigo)).build()}">
+                                <div><span th:text="${vaga.nome}" style="color:#fff;"></span>
+                                </div> 
+                                
+                                <div th:each="candidato : ${candidatosPorVaga[__${vagaIndex.index}__]}">
+                                    <span th:text="${candidato.nomeCandidato}" style="color:#fff;"></span> 
+                                    <span th:text="${candidato.email}" style="color:#fff;"></span> 
+                                    <span th:text="${candidato.rg}" style="color:#fff;"></span>
+                                </div>
+                            
+                            </a>
+                        </h3>
+                    </div>
+                    <div class="col-sm-4" style="background-color:#2c3e50;">
+						 <div>R$ <span th:text="${vaga.salario}" style="color:#fff;"></span>
+                                </div> 
+                    	  <a th:href="${(#mvc.url('VC#detalhesVaga').arg(0, vaga.codigo)).build()}">
+                        <button type="button" class="btn btn-success" style="background-color:#e74c3c"; >Adicionar ao Carrinho</button>
+                    </a>
+                    </div>
+                    <br><br>
+                </div>
+                <br><br>
+                
+            </div>
+        </div>
+    </div>
     <div class="footer">
         <button type="button" class="btn" style="background-color:#2c3e50";><a href="/cadastrarVaga"></i>Cadastrar Prato</a></button>
     </div>

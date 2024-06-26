@@ -55,7 +55,6 @@
 
 	<div class="container">
 
-		
 		<form method="post" action="/cadastrarPedido">
     <h1>Detalhes do prato:</h1>
     <div th:each="vaga : ${vaga}" class="container">
@@ -72,16 +71,19 @@
         <p>
             <b>Valor:</b> R$ <span th:text="${vaga.salario}"></span>
         </p>
-        <br> <br>
         <input type="hidden" th:value="${vaga.nome}" name="nome">
         <input type="hidden" th:value="${vaga.descricao}" name="descricao">
         <input type="hidden" th:value="${vaga.data}" name="data">
         <input type="hidden" th:value="${vaga.salario}" name="salario">
     </div>
-    <button type="submit" class="btn btn-success">Cadastrar Pedido</button>
+    <button type="submit" class="btn btn-success">Cadastrar Pedido do cliente</button>
 </form>
+<br>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+		
+</nav>
 
- <tbody>
+<tbody>
                 <tr th:each="vaga, vagaIndex : ${vagas}">
                     <td><a th:href="${(#mvc.url('VC#detalhesVaga').arg(0, vaga.codigo)).build()}">
                         <span th:text="${vaga.nome}"></span></a></td>
@@ -113,7 +115,7 @@
 
 
 
-			<h2>Cadastrar itens:</h2>
+			<h2>Cadastrar itens para o cardápio de hoje:</h2>
 
 			<th:block th:include="mensagemValidacao"></th:block>
 			
@@ -154,8 +156,11 @@
 		
 
 		<br> <br>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+		
+</nav>
 
-		<h2>Inscritos:</h2>
+		<h2>Adicionados:</h2>
 
 		<br>
 
