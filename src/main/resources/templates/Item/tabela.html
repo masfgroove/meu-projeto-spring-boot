@@ -3,17 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
+    <title>Itens Cadastrados</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <style>
-        .navbar-brand {
-            font-weight: bold;
-        }
-        .navbar-nav a {
-            margin-right: 10px;
-        }
-    </style>
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -23,20 +15,45 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
-              
+               
                 <li class="nav-item">
                     <a class="nav-link" href="/cadastrarItem">Formulário</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/itens">Tabela</a>
                 </li>
+                      <li class="nav-item">
+                    <a class="nav-link" href="/sobre">Sobre</a>
+                </li>
+          
             </ul>
         </div>
     </nav>
 
     <div class="container mt-4">
-        <h1 class="text-center">Bem-vindo ao Projeto!</h1>
-        <p class="text-center">Explore as funcionalidades do projeto através do menu acima.</p>
+        <h3>Lista de Itens</h3>
+        <a href="/cadastrarItem" class="btn btn-primary mb-3">Cadastrar Novo Item</a>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nome</th>
+                    <th>Descrição</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="item : ${itens}">
+                    <td th:text="${item.id}"></td>
+                    <td th:text="${item.nome}"></td>
+                    <td th:text="${item.descricao}"></td>
+                    <td>
+                        <a th:href="@{/editarItem/{id}(id=${item.id})}" class="btn btn-warning btn-sm">Editar</a>
+                        <a th:href="@{/deletarItem/{id}(id=${item.id})}" class="btn btn-danger btn-sm" onclick="return confirm('Tem certeza que deseja deletar?')">Deletar</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 
     <!-- Scripts necessários para o Bootstrap -->
@@ -45,4 +62,3 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
-
